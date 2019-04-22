@@ -17,7 +17,8 @@ class Gossip
   def self.all
       all_gossips = []
 
-      CSV.foreach("./db/gossip.csv", quote_char: '"', row_sep: :auto, headers: true) do |row|
+      #CSV.foreach("./db/gossip.csv", quote_char: '"', row_sep: :auto, headers: true) do |row|
+      CSV.read("./db/gossip.csv").each do |row|
         gossip_temp = Gossip.new(row[0],row[1])
         all_gossips << gossip_temp
       end
