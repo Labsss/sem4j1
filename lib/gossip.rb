@@ -2,6 +2,7 @@ require 'csv'
 require 'pry'
 
 class Gossip
+    attr_accessor :author, :content
 
     def initialize(author, content)
         @content = content
@@ -15,7 +16,7 @@ class Gossip
         end
     end
 
-    def all
+    def self.all
         all_gossips = []
 
         CSV.foreach("./db/gossip.csv", quote_char: '"', row_sep: :auto, headers: true) do |row|
@@ -24,5 +25,16 @@ class Gossip
         end
         all_gossips
     end
-    
+
+    def self.find(id)
+		gossips = []
+		CSV.read("./db/gossip.csv").each_with_index do |row, index|
+			if (id == index+1)
+  			gossips << Gossip.new(row[0], row[1])
+  			break
+  		    end
+        end
+        return gossips
+    end
+    #binding.pry
 end
