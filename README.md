@@ -3,7 +3,7 @@ Projet de Brice Jones (@brice)
 
 ### Objet
 
-C'est un gestionnaire de potins avec Frankie Goes To Hollywoord.
+C'est un gestionnaire de potins avec Frankie Goes To Hollywood.
 
 L'app met en oeuvre le framework sinatra.
 
