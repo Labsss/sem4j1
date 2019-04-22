@@ -7,9 +7,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Créer un potin</title>
+    <title>Editer un potin</title>
   </head>
   <body>
+    <!-- Menu de navigation avec 2 items -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">The Gossip Project</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,13 +27,18 @@
           </ul>
       </div>
     </nav>
-    <h1>Crée un potin !</h1>
-    <p>Balance ton potin via le formulaire ci-dessous</p>
-    <form action='/gossips/new/' method='POST'>
-      Saisis ici ton nom :  <input type='text' name='gossip_author'/><br/>
-      Balances ton potin : <input type='text' name='gossip_content'/><br/>
-      <input class="btn btn-primary" type='submit'/>
-    </form>
+
+    <h1>Editer un potin !</h1>
+    <br/> 
+    <p>Met à jour le potin <%= id%> via le formulaire ci-dessous</p> 
+    <form action='/gossips/edit/' method='POST'> 
+        <% gossips.each do |gossip| %>
+            Modifie le nom :  <input type='text' name='gossip_author' value="<%= gossip.author %>" /><br/> 
+            Balances ton potin : <input type='text' name='gossip_content' value="<%= gossip.content %>" /><br/> 
+         <% end %>
+        <input type='hidden' name='id' value='<%= id %>'/>
+        <input class="btn btn-primary" type='submit'/> 
+    </form> 
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

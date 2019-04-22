@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 class Gossip
   attr_accessor :author, :content
@@ -37,9 +36,23 @@ class Gossip
       return gossips
   end
 
-  def self.update(id)
+  def self.update(id,author,content)
     puts id
-    
+    gossips = []
+		CSV.read("./db/gossip.csv").each_with_index do |row,i|
+			if id.to_i == i    # i+1  
+				gossips<< Gossip.new(author, content)
+			else
+				gossips << Gossip.new(row[0], row[1])
+			end
+		end
+
+		CSV.open("./db/gossip.csv", "w") do |csv| 
+			gossips.each do |row|
+				csv << row
+    end
   end
-  #binding.pry
+
+end
+  
 end
