@@ -17,19 +17,18 @@ class Gossip
   def self.all
       all_gossips = []
 
-      #CSV.foreach("./db/gossip.csv", quote_char: '"', row_sep: :auto, headers: true) do |row|
-      CSV.read("./db/gossip.csv").each do |row|
-        gossip_temp = Gossip.new(row[0],row[1])
+      CSV.read("./db/gossip.csv").each do |row|   # lecture du csv, ligne par ligne pour créer un array à afficher
+        gossip_temp = Gossip.new(row[0],row[1])   # concatène author et comment
         all_gossips << gossip_temp
       end
-      all_gossips
+      all_gossips # retourne l'array vers le controller pour l'afficher dans l'index.erb
   end
 
   def self.find(id)
-  gossips = []
+  gossips = []   # permet de stocker la ligne csv demandée
   CSV.read("./db/gossip.csv").each_with_index do |row, index|
-    if (id == index+1)
-      gossips << Gossip.new(row[0], row[1])
+    if (id == index+1)          # cherche et check si l'index est égale id demandé
+      gossips << Gossip.new(row[0], row[1])    # si trouvé, ajout dans array et break pour retourner l'array
       break
         end
       end
@@ -39,6 +38,7 @@ class Gossip
   def self.update(id,author,content)
     gossips = []
 
+    # recréé l'arrayt et csv avec les données modifiées.
 		CSV.read("./db/gossip.csv").each_with_index do |row, index|
 			if id.to_i == (index + 1)    # i 
 				gossips << [author, content]
