@@ -9,9 +9,8 @@ class Gossip
     end
 
   def save
-      CSV.open("./db/gossip.csv", "a") do |csv|
+      CSV.open("./db/gossip.csv", "ab") do |csv|
           csv << [@author, @content]
-          #csv << ["Mon super auteur", "Ma super description"]
       end
   end
 
@@ -37,13 +36,13 @@ class Gossip
   end
 
   def self.update(id,author,content)
-    puts id
     gossips = []
-		CSV.read("./db/gossip.csv").each_with_index do |row,i|
-			if id.to_i == i    # i+1  
-				gossips<< Gossip.new(author, content)
+
+		CSV.read("./db/gossip.csv").each_with_index do |row, index|
+			if id.to_i == (index + 1)    # i 
+				gossips << [author, content]
 			else
-				gossips << Gossip.new(row[0], row[1])
+				gossips << [row[0], row[1]]
 			end
 		end
 

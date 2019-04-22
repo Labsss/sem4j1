@@ -32,22 +32,15 @@
   </div>
 </nav>
 
-
   <h1 class="text-center">Mon super site de gossips !</h1>
+  <br/>
   <% gossips.each_with_index do |gossip,index| %>
       <p>
-        <a href="/gossips/<%= index+1 %>"><%= gossip.author %></a><br/>
+        <a href="/gossips/<%= (index+1) %>"><%= gossip.author %></a><br/>
         <%= gossip.content %>
       </p>
     <% end %>
-<!--
-<% gossips.each_with_index do |gossip,index| %>
-        <p>
-          <a href="/gossips/<%= index+1 %>/"><%= gossip.author %></a><br/>
-          <a href="/gossips/update/<%= index+1 %>/"><%= gossip.content %></a><br/>
-        </p>
-<% end %>
--->
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
